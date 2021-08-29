@@ -1,0 +1,44 @@
+{
+  "name": "fire-commerce",
+  "version": "0.0.0",
+  "description": "Firebase e-commerce",
+  "main": "index.js",
+  "scripts": {
+    "start:webapp": "npm run start --workspace=webapp",
+    "start:emulators": "firebase emulators:start --import=./dir --export-on-exit",
+    "commit": "git add -A && cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/open-firebase/fire-commerce.git"
+  },
+  "keywords": [
+    "firebase",
+    "e-commerce",
+    "commerce",
+    "react"
+  ],
+  "author": "open-firebase",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/open-firebase/fire-commerce/issues"
+  },
+  "homepage": "https://github.com/open-firebase/fire-commerce#readme",
+  "workspaces": [
+    "functions",
+    "webapp"
+  ],
+  "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^7.0.2",
+    "standard-version": "^9.3.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
