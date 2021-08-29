@@ -6,7 +6,8 @@
   "scripts": {
     "start:webapp": "npm run start --workspace=webapp",
     "start:emulators": "firebase emulators:start --import=./dir --export-on-exit",
-    "commit": "git add -A && cz"
+    "commit": "git add -A && cz",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
