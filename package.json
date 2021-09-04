@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:webapp": "npm run start --workspace=webapp",
+    "start:dashboard": "npm run start --workspace=dashboard",
     "start:emulators": "firebase emulators:start --import=./dir --export-on-exit",
     "commit": "git add -A && cz",
     "release": "standard-version"
@@ -27,7 +28,8 @@
   "homepage": "https://github.com/open-firebase/fire-commerce#readme",
   "workspaces": [
     "functions",
-    "webapp"
+    "webapp",
+    "dashboard"
   ],
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
