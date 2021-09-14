@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-import { FormControl, FormLabel } from '@chakra-ui/form-control'
+import { FormControl, FormLabel, FormHelperText } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
-import { Box, VStack } from '@chakra-ui/layout'
+import { Box, HStack, VStack } from '@chakra-ui/layout'
 import {
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -11,35 +11,51 @@ import {
   NumberInputStepper,
 } from '@chakra-ui/number-input'
 import { Textarea } from '@chakra-ui/textarea'
-import { WithContext as Tags } from 'react-tag-input'
 
 import { AppBreadcrumb } from '../../../components/AppBreadcrumb'
 import { productBreadcrumb } from '../../../constants/breadcrumbs'
 import { Button } from '@chakra-ui/button'
+import TagElement from '../../../components/TagElement'
 
-interface TagType {
-  id: string
-  text: string
+interface formInputType {
+  name: string
+  price: number
+  stock: number
+  short_description: string
+  description: string
+  tag: string
 }
-
-const KeyCodes = {
-  comma: 188,
-  enter: 13,
-}
-
-const delimiters = [KeyCodes.comma, KeyCodes.enter]
 
 const ProductCreate: React.FC = () => {
-  const [tags, setTags] = useState<TagType[]>([{ id: '', text: '' }])
+  const [formInput, setFormInput] = useState<formInputType>({
+    name: '',
+    price: 0,
+    stock: 0,
+    short_description: '',
+    description: '',
+    tag: '',
+  })
+  const [tags, setTags] = React.useState<string[]>([])
 
   const { create } = productBreadcrumb
 
-  const handleDelete = (i: number) => {
-    setTags(tags.filter((tag, index) => index !== i))
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormInput({ ...formInput, [e.target.name]: e.target.value })
   }
 
-  const handleAddition = (tag: TagType) => {
-    setTags([...tags, tag])
+  const handleAddTags = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const inputValue = e.currentTarget.value
+
+    const canAdd =
+      tags.length === 0 ||
+      !tags.map((tag) => tag === inputValue).filter((tag) => tag === true)[0]
+
+    if (e.key === 'Enter' && inputValue !== '' && tags.length < 10 && canAdd) {
+      setTags([...tags, formInput.tag])
+      setFormInput({ ...formInput, tag: '' })
+    }
   }
 
   const handleCreateProduct = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -61,13 +77,24 @@ const ProductCreate: React.FC = () => {
         <VStack spacing="6">
           <FormControl id="name" isRequired>
             <FormLabel>Product Name</FormLabel>
-            <Input type="text" placeholder="product name" />
+            <Input
+              type="text"
+              onChange={handleInputChange}
+              value={formInput.name}
+              name="name"
+              placeholder="product name"
+            />
           </FormControl>
 
           <FormControl id="price" isRequired>
             <FormLabel>Price</FormLabel>
             <NumberInput min={1}>
-              <NumberInputField placeholder="price" />
+              <NumberInputField
+                onChange={handleInputChange}
+                value={formInput.price}
+                name="price"
+                placeholder="price"
+              />
               <NumberInputStepper>
                 <NumberIncrementStepper />
                 <NumberDecrementStepper />
@@ -78,7 +105,12 @@ const ProductCreate: React.FC = () => {
           <FormControl id="stock" isRequired>
             <FormLabel>InStock</FormLabel>
             <NumberInput min={0}>
-              <NumberInputField placeholder="Instock" />
+              <NumberInputField
+                onChange={handleInputChange}
+                value={formInput.stock}
+                name="stock"
+                placeholder="Instock"
+              />
               <NumberInputStepper>
                 <NumberIncrementStepper />
                 <NumberDecrementStepper />
@@ -97,27 +129,55 @@ const ProductCreate: React.FC = () => {
 
           <FormControl id="short-description" isRequired>
             <FormLabel>Short Description</FormLabel>
+            <FormHelperText>{`${formInput.short_description.length}/100`}</FormHelperText>
             <Textarea
-              placeholder="Short Description for SEO"
-              size="md"
+              onChange={handleInputChange}
+              value={formInput.short_description}
+              name="short_description"
               maxLength={100}
+              size="md"
+              placeholder="Short Description for SEO"
+              resize="none"
             ></Textarea>
           </FormControl>
 
           <FormControl id="description" isRequired>
             <FormLabel>Description</FormLabel>
-            <Textarea placeholder="Description" size="md"></Textarea>
+            <Textarea
+              rows={10}
+              onChange={handleInputChange}
+              value={formInput.description}
+              name="description"
+              placeholder="Description"
+              size="md"
+              resize="none"
+            ></Textarea>
           </FormControl>
 
           <FormControl id="tags" isRequired>
             <FormLabel>Tag</FormLabel>
-            <Tags
-              tags={tags}
-              delimiters={delimiters}
-              handleDelete={handleDelete}
-              handleAddition={handleAddition}
-              inputFieldPosition="bottom"
-              autocomplete
+            <HStack my="2">
+              {tags.map((tag, index) => {
+                return (
+                  <TagElement
+                    key={`${tag}-${index}`}
+                    value={tag}
+                    onClose={() => {
+                      setTags((currentTags) => {
+                        return currentTags.filter((t) => t !== tag)
+                      })
+                    }}
+                  />
+                )
+              })}
+            </HStack>
+            <Input
+              type="text"
+              onChange={handleInputChange}
+              onKeyPress={handleAddTags}
+              value={formInput.tag}
+              name="tag"
+              placeholder="tags..."
             />
           </FormControl>
 
