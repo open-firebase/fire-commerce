@@ -1,21 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 // import PropTypes from 'prop-types'
 
 import { VStack } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
 import { CgMail } from 'react-icons/cg'
-import { GoogleLogin } from '../../services/GoogleAuth'
+import { getGoogleAuth, LoginWithGoogle } from '../../services/LoginWithGoogle'
 
 const Login: React.FC = () => {
   const onGoogleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-
-    const { user, token, error } = await GoogleLogin()
-
-    console.log('User: ', user)
-    console.log('Token: ', token)
-    console.log('Error: ', error)
+    await LoginWithGoogle()
   }
+
+  useEffect(() => {
+    getGoogleAuth().then((result) => {
+      console.log(result.user)
+    })
+  }, [])
 
   return (
     <VStack justifyContent="center" alignItems="center" height="100vh">
