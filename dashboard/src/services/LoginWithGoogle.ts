@@ -5,8 +5,8 @@ import {
 } from '@firebase/auth'
 import { auth } from './firebase'
 
-export const LoginWithGoogle = async () => {
-  signInWithRedirect(auth, new GoogleAuthProvider())
+export const LoginWithGoogle = () => {
+  return signInWithRedirect(auth, new GoogleAuthProvider())
 }
 
 export const getGoogleAuth = async () => {

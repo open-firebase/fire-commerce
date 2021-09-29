@@ -4,18 +4,24 @@ import React, { useEffect } from 'react'
 import { Button } from '@chakra-ui/button'
 import { VStack } from '@chakra-ui/layout'
 import { CgMail } from 'react-icons/cg'
-import { getGoogleAuth, LoginWithGoogle } from '../../services/LoginWithGoogle'
+import { getGoogleAuth, LoginWithGoogle } from '@src/services/LoginWithGoogle'
+import { useHistory } from 'react-router'
 
 const StartUp: React.FC = () => {
-  const onGoogleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const history = useHistory()
+
+  const onGoogleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    await LoginWithGoogle()
+    LoginWithGoogle()
   }
 
   useEffect(() => {
-    getGoogleAuth().then((result) => {
-      console.log(result.user)
-    })
+    console.log('start-up index re-render')
+    getGoogleAuth()
+      .then(() => {
+        history.push('/:dn/dashboard')
+      })
+      .catch((e) => console.log(e))
   }, [])
 
   return (

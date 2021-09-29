@@ -34,7 +34,9 @@
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
+    "@craco/craco": "^6.3.0",
     "commitizen": "^4.2.4",
+    "craco-alias": "^3.0.1",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^7.0.2",
     "standard-version": "^9.3.1"

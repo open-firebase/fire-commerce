@@ -11,11 +11,11 @@ import {
   NumberInputStepper,
 } from '@chakra-ui/number-input'
 import { Textarea } from '@chakra-ui/textarea'
-
-import { AppBreadcrumb } from '../../../components/AppBreadcrumb'
-import { productBreadcrumb } from '../../../constants/breadcrumbs'
 import { Button } from '@chakra-ui/button'
-import TagElement from '../../../components/TagElement'
+
+import { AppBreadcrumb } from '@src/components/AppBreadcrumb'
+import { productBreadcrumb } from '@src/constants/breadcrumbs'
+import TagElement from '@src/components/TagElement'
 
 interface formInputType {
   name: string

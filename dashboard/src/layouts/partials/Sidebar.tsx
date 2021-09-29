@@ -11,7 +11,7 @@ import { FaList, FaUsers } from 'react-icons/fa'
 import { FcSalesPerformance, FcSettings } from 'react-icons/fc'
 import { Link } from 'react-router-dom'
 import { useAtom } from 'jotai'
-import { useIsToggleSidebarAtom } from '../../atoms/ToggleSidebarAtom'
+import { useIsToggleSidebarAtom } from '@src/atoms/ToggleSidebarAtom'
 import { IconButton } from '@chakra-ui/button'
 
 const Sidebar: React.FC = () => {

@@ -4,7 +4,7 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import { Header } from './partials/Header'
 import { Sidebar } from './partials/Sidebar'
 import { useAtom } from 'jotai'
-import { useIsToggleSidebarAtom } from '../atoms/ToggleSidebarAtom'
+import { useIsToggleSidebarAtom } from '@src/atoms/ToggleSidebarAtom'
 
 const Authorized: React.FC = ({ children }) => {
   const [isToggleSidebar] = useAtom(useIsToggleSidebarAtom)
