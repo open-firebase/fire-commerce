@@ -2,6 +2,7 @@ import {
   getRedirectResult,
   GoogleAuthProvider,
   signInWithRedirect,
+  signOut,
 } from '@firebase/auth'
 import { auth } from './firebase'
 
@@ -18,8 +19,12 @@ export const getGoogleAuth = async () => {
     const token = credentials?.accessToken
     const user = result?.user
 
-    return { user, token }
+    return Promise.resolve({ user, token })
   } catch (error) {
-    return { error }
+    return Promise.reject({ error })
   }
+}
+
+export const logout = () => {
+  return signOut(auth)
 }

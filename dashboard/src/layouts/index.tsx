@@ -24,16 +24,17 @@ const RouteWithLayout: React.FC<RouteWithLayoutProps & RouteProps> = ({
     onAuthStateChanged(auth, (user) => {
       if (user) setAuthUser(user)
     })
-  })
+  }, [authUser])
 
   if (layout === 'authorized') {
-    return (authUser as any) ? (
+    return (
       <Route {...props}>
         <Authorized>{children}</Authorized>
       </Route>
-    ) : (
-      <Redirect to="/" />
     )
+    // : (
+    //   <Redirect to="/" />
+    // )
   }
 
   return (

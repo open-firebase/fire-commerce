@@ -13,9 +13,7 @@ const Login: React.FC = () => {
   }
 
   useEffect(() => {
-    getGoogleAuth().then((result) => {
-      console.log(result.user)
-    })
+    getGoogleAuth().then((result) => {})
   }, [])
 
   return (

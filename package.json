@@ -4,8 +4,8 @@
   "description": "Firebase e-commerce",
   "main": "index.js",
   "scripts": {
-    "start:webapp": "npm run start --workspace=webapp",
-    "start:dashboard": "npm run start --workspace=dashboard",
+    "start:webapp": "npm run start -w webapp",
+    "start:dashboard": "npm run start -w dashboard",
     "start:emulators": "firebase emulators:start --import=./dir --export-on-exit",
     "commit": "git add -A && cz",
     "release": "standard-version"

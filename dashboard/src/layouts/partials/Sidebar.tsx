@@ -1,7 +1,10 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 
-import { Box, List, ListIcon, ListItem, Text } from '@chakra-ui/layout'
+import { Link as RLink } from 'react-router-dom'
+import { useAtom } from 'jotai'
+import { Box, Text, IconButton, VStack, Flex } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import {
   AiOutlineDashboard,
   AiOutlineDoubleLeft,
@@ -9,27 +12,117 @@ import {
 } from 'react-icons/ai'
 import { FaList, FaUsers } from 'react-icons/fa'
 import { FcSalesPerformance, FcSettings } from 'react-icons/fc'
-import { Link } from 'react-router-dom'
-import { useAtom } from 'jotai'
-import { useIsToggleSidebarAtom } from '@src/atoms/ToggleSidebarAtom'
-import { IconButton } from '@chakra-ui/button'
+
+import { useIsSidebarOpen } from '@src/atoms/ToggleSidebarAtom'
+
+const Link = styled(RLink)({
+  display: 'flex',
+  alignItems: 'center',
+})
 
 const Sidebar: React.FC = () => {
-  const [isToggleSidebar, setIsToggleSidebar] = useAtom(useIsToggleSidebarAtom)
+  const [isSidebarOpen, setIsSidebarOpen] = useAtom(useIsSidebarOpen)
 
   return (
-    <Box
+    <Flex
+      flexDirection="column"
+      justifyContent="space-between"
       height="100vh"
       borderRight="1px"
       borderColor="gray.200"
-      px={isToggleSidebar ? '16' : '8'}
+      px={isSidebarOpen ? '8' : '4'}
       position="relative"
     >
-      <Box pt="4" pb="8">
-        <Text>{isToggleSidebar ? 'Website Logo' : 'Icon'}</Text>
+      <Box>
+        <VStack py="4" alignItems={isSidebarOpen ? 'flex-start' : 'center'}>
+          <Text h="48px">{isSidebarOpen ? 'Website Logo' : 'Icon'}</Text>
+        </VStack>
+
+        <VStack
+          spacing="6"
+          alignItems={isSidebarOpen ? 'flex-start' : 'center'}
+        >
+          <Link
+            to={{
+              pathname: '/:dn/dashboard',
+            }}
+          >
+            <IconButton
+              variant="ghost"
+              aria-label="dashboard"
+              icon={<AiOutlineDashboard />}
+              mr={isSidebarOpen ? '2' : '0'}
+            />
+            {isSidebarOpen && 'Dashboard'}
+          </Link>
+
+          <Link
+            to={{
+              pathname: '/:dn/users',
+            }}
+          >
+            <IconButton
+              variant="ghost"
+              aria-label="users"
+              icon={<FaUsers />}
+              mr={isSidebarOpen ? '2' : '0'}
+            />
+            {isSidebarOpen && 'Users'}
+          </Link>
+
+          <Link to="/:dn/products">
+            <IconButton
+              variant="ghost"
+              aria-label="products"
+              icon={<FaList />}
+              mr={isSidebarOpen ? '2' : '0'}
+            />
+            {isSidebarOpen && 'Products'}
+          </Link>
+
+          <Link to="/">
+            <IconButton
+              variant="ghost"
+              aria-label="campaigns"
+              icon={<FaList />}
+              mr={isSidebarOpen ? '2' : '0'}
+            />
+            {isSidebarOpen && 'Campaigns'}
+          </Link>
+
+          <Link to="/">
+            <IconButton
+              variant="ghost"
+              aria-label="orders"
+              icon={<FaList />}
+              mr={isSidebarOpen ? '2' : '0'}
+            />
+            {isSidebarOpen && 'Orders'}
+          </Link>
+
+          <Link to="/">
+            <IconButton
+              variant="ghost"
+              aria-label="sales"
+              icon={<FcSalesPerformance />}
+              mr={isSidebarOpen ? '2' : '0'}
+            />
+            {isSidebarOpen && 'Sales'}
+          </Link>
+
+          <Link to="/">
+            <IconButton
+              variant="ghost"
+              aria-label="campaigns"
+              icon={<FcSettings />}
+              mr={isSidebarOpen ? '2' : '0'}
+            />
+            {isSidebarOpen && 'Settings'}
+          </Link>
+        </VStack>
       </Box>
 
-      <Box pt="8">
+      {/* <Box pt="8">
         <List spacing={6}>
           <ListItem>
             <Link
@@ -38,7 +131,7 @@ const Sidebar: React.FC = () => {
               }}
             >
               <ListIcon as={AiOutlineDashboard} />
-              {isToggleSidebar && 'Dashboard'}
+              {isSidebarOpen && 'Dashboard'}
             </Link>
           </ListItem>
 
@@ -49,59 +142,60 @@ const Sidebar: React.FC = () => {
               }}
             >
               <ListIcon as={FaUsers} />
-              {isToggleSidebar && 'Users'}
+              {isSidebarOpen && 'Users'}
             </Link>
           </ListItem>
 
           <ListItem>
             <Link to="/:dn/products">
               <ListIcon as={FaList} />
-              {isToggleSidebar && 'Products'}
+              {isSidebarOpen && 'Products'}
             </Link>
           </ListItem>
 
           <ListItem>
             <Link to="/">
               <ListIcon as={FaList} />
-              {isToggleSidebar && 'Campaigns'}
+              {isSidebarOpen && 'Campaigns'}
             </Link>
           </ListItem>
 
           <ListItem>
             <Link to="/">
               <ListIcon as={FaList} />
-              {isToggleSidebar && 'Orders'}
+              {isSidebarOpen && 'Orders'}
             </Link>
           </ListItem>
 
           <ListItem>
             <Link to="/">
               <ListIcon as={FcSalesPerformance} />
-              {isToggleSidebar && 'Sales'}
+              {isSidebarOpen && 'Sales'}
             </Link>
           </ListItem>
 
           <ListItem>
             <Link to="/">
               <ListIcon as={FcSettings} />
-              {isToggleSidebar && 'Settings'}
+              {isSidebarOpen && 'Settings'}
             </Link>
           </ListItem>
         </List>
-      </Box>
+      </Box> */}
 
-      <Box position="absolute" bottom="0" right="0" mt={6}>
+      <VStack mt="6" py="4" alignItems={isSidebarOpen ? 'flex-end' : 'center'}>
         <IconButton
-          onClick={setIsToggleSidebar}
+          onClick={setIsSidebarOpen}
           icon={
-            isToggleSidebar ? <AiOutlineDoubleLeft /> : <AiOutlineDoubleRight />
+            isSidebarOpen ? <AiOutlineDoubleLeft /> : <AiOutlineDoubleRight />
           }
-          size="lg"
+          size="md"
           aria-label="Left/Right Arrow"
-          variant="link"
+          variant="outline"
+          rounded="full"
         />
-      </Box>
-    </Box>
+      </VStack>
+    </Flex>
   )
 }
 

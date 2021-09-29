@@ -9,10 +9,7 @@ const Dashboard: React.FC = () => {
   const [authUser] = useAtom(useAuthUserAtom)
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      console.log('User', user)
-      console.log('Auth User', authUser)
-    })
+    onAuthStateChanged(auth, (user) => {})
   })
 
   return <>Dashboard</>

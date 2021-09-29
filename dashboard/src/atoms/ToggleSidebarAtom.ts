@@ -1,10 +1,10 @@
 import { atom } from 'jotai'
 
-const isToggleSidebarAtom = atom(false)
+const isSidebarOpenAtom = atom(false)
 
-export const useIsToggleSidebarAtom = atom(
-  (get) => get(isToggleSidebarAtom),
+export const useIsSidebarOpen = atom(
+  (get) => get(isSidebarOpenAtom),
   (get, set) => {
-    set(isToggleSidebarAtom, !get(isToggleSidebarAtom))
+    set(isSidebarOpenAtom, !get(isSidebarOpenAtom))
   },
 )

@@ -16,6 +16,7 @@ import { Button } from '@chakra-ui/button'
 import { AppBreadcrumb } from '@src/components/AppBreadcrumb'
 import { productBreadcrumb } from '@src/constants/breadcrumbs'
 import TagElement from '@src/components/TagElement'
+import { FileInput } from '@src/components/base/FileInput/FileInput'
 
 interface formInputType {
   name: string
@@ -66,6 +67,8 @@ const ProductCreate: React.FC = () => {
   return (
     <Box p="8">
       <AppBreadcrumb links={create}></AppBreadcrumb>
+
+      <FileInput />
 
       <Box
         p="8"
