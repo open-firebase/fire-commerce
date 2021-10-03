@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Route, RouteProps, Redirect } from 'react-router-dom'
+import { Route, RouteProps } from 'react-router-dom'
 
 import { Authorized } from '@src/layouts/Authorized'
 import { UnAuthorized } from '@src/layouts/UnAuthorized'

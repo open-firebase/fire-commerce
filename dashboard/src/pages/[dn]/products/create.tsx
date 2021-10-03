@@ -25,6 +25,7 @@ interface formInputType {
   short_description: string
   description: string
   tag: string
+  cover: string
 }
 
 const ProductCreate: React.FC = () => {
@@ -35,15 +36,19 @@ const ProductCreate: React.FC = () => {
     short_description: '',
     description: '',
     tag: '',
+    cover: '',
   })
   const [tags, setTags] = React.useState<string[]>([])
 
   const { create } = productBreadcrumb
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setFormInput({ ...formInput, [e.target.name]: e.target.value })
+    setFormInput({
+      ...formInput,
+      [e.currentTarget.name]: e.currentTarget.value,
+    })
   }
 
   const handleAddTags = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -67,8 +72,6 @@ const ProductCreate: React.FC = () => {
   return (
     <Box p="8">
       <AppBreadcrumb links={create}></AppBreadcrumb>
-
-      <FileInput />
 
       <Box
         p="8"
@@ -123,10 +126,10 @@ const ProductCreate: React.FC = () => {
 
           <FormControl id="cover-image" isRequired>
             <FormLabel>Cover Image</FormLabel>
-            <Input
-              type="file"
-              placeholder="Cover Image for SEO"
-              accept="image/*"
+            <FileInput
+              name="cover"
+              onChange={handleInputChange}
+              multiple={false}
             />
           </FormControl>
 
