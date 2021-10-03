@@ -3,12 +3,23 @@ import PropTypes from 'prop-types'
 import { useDropzone } from 'react-dropzone'
 import { Box, Text, Image, Stack } from '@chakra-ui/react'
 
-const FileInput: React.FC<
-  React.HtmlHTMLAttributes<HTMLInputElement> & {
-    name?: string
-    multiple?: boolean
-  }
-> = ({ name, multiple, ...rest }) => {
+type FileInputProps = Omit<
+  React.HtmlHTMLAttributes<HTMLInputElement>,
+  'onChange'
+> & {
+  ref?: any
+  name?: string
+  multiple?: boolean
+  onChange?: (files: File[]) => void
+}
+
+const FileInput: React.FC<FileInputProps> = ({
+  ref,
+  name,
+  multiple,
+  onChange,
+  ...rest
+}) => {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     multiple: multiple ? true : false,
   })
@@ -22,6 +33,8 @@ const FileInput: React.FC<
       alt="Cover"
     />
   ))
+
+  React.useEffect(() => onChange && onChange(acceptedFiles), [acceptedFiles])
 
   return (
     <Box border="1px dashed #ccc" minW="xl" textAlign="center">

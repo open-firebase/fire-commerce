@@ -1,0 +1,19 @@
+{
+  "name": "test/facebook.png.png",
+  "bucket": "fire-commerce-ccfb0.appspot.com",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1633266605121,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "5c728b2b-6ad2-44b5-a05f-c590ea23ae1f"
+  ],
+  "timeCreated": "2021-10-03T13:10:05.120Z",
+  "updated": "2021-10-03T13:10:05.120Z",
+  "size": 3322,
+  "md5Hash": "i9J34n1DlVKuelsQ/gtR1Q==",
+  "crc32c": "3008394182"
+}

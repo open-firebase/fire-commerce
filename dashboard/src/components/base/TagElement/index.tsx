@@ -20,4 +20,4 @@ TagElement.propTypes = {
   onClose: PropTypes.func.isRequired,
 }
 
-export default TagElement
+export { TagElement }

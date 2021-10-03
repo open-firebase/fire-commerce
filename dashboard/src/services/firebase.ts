@@ -1,7 +1,11 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth, connectAuthEmulator } from 'firebase/auth'
-import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore'
-import { getStorage } from 'firebase/storage'
+import {
+  getFirestore,
+  connectFirestoreEmulator,
+  collection as fCollection,
+} from 'firebase/firestore'
+import { getStorage, connectStorageEmulator } from 'firebase/storage'
 
 const firebaseApp = initializeApp({
   projectId: 'fire-commerce-ccfb0',
@@ -17,11 +21,14 @@ const auth = getAuth(firebaseApp)
 const firestore = getFirestore(firebaseApp)
 const storage = getStorage(firebaseApp)
 
+const collection = (colName: string) => fCollection(firestore, colName)
+
 if (!process.env.PRODUCTION) {
   connectAuthEmulator(auth, 'http://localhost:9099', {
     disableWarnings: true,
   })
   connectFirestoreEmulator(firestore, 'localhost', 8080)
+  connectStorageEmulator(storage, 'localhost', 9199)
 }
 
-export { auth, firestore, storage }
+export { auth, firestore, storage, collection }

@@ -2,6 +2,9 @@
   "buckets": [
     {
       "id": "default-bucket"
+    },
+    {
+      "id": "fire-commerce-ccfb0.appspot.com"
     }
   ]
 }
