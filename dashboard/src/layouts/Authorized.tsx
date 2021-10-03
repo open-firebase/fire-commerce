@@ -1,16 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useAtom } from 'jotai'
 import { Grid, GridItem } from '@chakra-ui/react'
+
 import { Header } from './partials/Header'
 import { Sidebar } from './partials/Sidebar'
-import { useAtom } from 'jotai'
-import { useIsToggleSidebarAtom } from '../atoms/ToggleSidebarAtom'
+import { useIsSidebarOpen } from '@src/atoms/ToggleSidebarAtom'
 
 const Authorized: React.FC = ({ children }) => {
-  const [isToggleSidebar] = useAtom(useIsToggleSidebarAtom)
+  const [isSidebarOpen] = useAtom(useIsSidebarOpen)
 
   return (
-    <Grid templateColumns={isToggleSidebar ? '300px 1fr' : '100px 1fr'}>
+    <Grid templateColumns={isSidebarOpen ? '300px 1fr' : '100px 1fr'}>
       <GridItem overflowY="auto" maxH="100vh">
         <Sidebar />
       </GridItem>

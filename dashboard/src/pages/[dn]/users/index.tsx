@@ -12,8 +12,8 @@ import {
   Tr,
 } from '@chakra-ui/table'
 
-import { AppBreadcrumb } from '../../../components/AppBreadcrumb'
-import { userBreadcrumb } from '../../../constants/breadcrumbs'
+import { AppBreadcrumb } from '@src/components/AppBreadcrumb'
+import { userBreadcrumb } from '@src/constants/breadcrumbs'
 
 const Users: React.FC = () => {
   const { list } = userBreadcrumb

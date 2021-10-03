@@ -11,11 +11,11 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/table'
-
-import { AppBreadcrumb } from '../../../components/AppBreadcrumb'
 import { Button } from '@chakra-ui/button'
 import { Link } from 'react-router-dom'
-import { productBreadcrumb } from '../../../constants/breadcrumbs'
+
+import { AppBreadcrumb } from '@src/components/AppBreadcrumb'
+import { productBreadcrumb } from '@src/constants/breadcrumbs'
 
 const Products: React.FC = () => {
   const { list } = productBreadcrumb

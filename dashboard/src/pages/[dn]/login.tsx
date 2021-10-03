@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import { VStack } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
 import { CgMail } from 'react-icons/cg'
-import { getGoogleAuth, LoginWithGoogle } from '../../services/LoginWithGoogle'
+import { getGoogleAuth, LoginWithGoogle } from '@src/services/LoginWithGoogle'
 
 const Login: React.FC = () => {
   const onGoogleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -13,9 +13,7 @@ const Login: React.FC = () => {
   }
 
   useEffect(() => {
-    getGoogleAuth().then((result) => {
-      console.log(result.user)
-    })
+    getGoogleAuth().then((result) => {})
   }, [])
 
   return (

@@ -11,11 +11,12 @@ import {
   NumberInputStepper,
 } from '@chakra-ui/number-input'
 import { Textarea } from '@chakra-ui/textarea'
-
-import { AppBreadcrumb } from '../../../components/AppBreadcrumb'
-import { productBreadcrumb } from '../../../constants/breadcrumbs'
 import { Button } from '@chakra-ui/button'
-import TagElement from '../../../components/TagElement'
+
+import { AppBreadcrumb } from '@src/components/AppBreadcrumb'
+import { productBreadcrumb } from '@src/constants/breadcrumbs'
+import TagElement from '@src/components/TagElement'
+import { FileInput } from '@src/components/base/FileInput/FileInput'
 
 interface formInputType {
   name: string
@@ -24,6 +25,7 @@ interface formInputType {
   short_description: string
   description: string
   tag: string
+  cover: string
 }
 
 const ProductCreate: React.FC = () => {
@@ -34,15 +36,19 @@ const ProductCreate: React.FC = () => {
     short_description: '',
     description: '',
     tag: '',
+    cover: '',
   })
   const [tags, setTags] = React.useState<string[]>([])
 
   const { create } = productBreadcrumb
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setFormInput({ ...formInput, [e.target.name]: e.target.value })
+    setFormInput({
+      ...formInput,
+      [e.currentTarget.name]: e.currentTarget.value,
+    })
   }
 
   const handleAddTags = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -120,10 +126,10 @@ const ProductCreate: React.FC = () => {
 
           <FormControl id="cover-image" isRequired>
             <FormLabel>Cover Image</FormLabel>
-            <Input
-              type="file"
-              placeholder="Cover Image for SEO"
-              accept="image/*"
+            <FileInput
+              name="cover"
+              onChange={handleInputChange}
+              multiple={false}
             />
           </FormControl>
 

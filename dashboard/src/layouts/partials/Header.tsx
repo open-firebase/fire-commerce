@@ -1,6 +1,8 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 
+import { useHistory } from 'react-router'
+import { useAtom } from 'jotai'
 import {
   Menu,
   MenuButton,
@@ -14,15 +16,16 @@ import { Input, InputGroup, InputLeftElement } from '@chakra-ui/input'
 import { GoSearch } from 'react-icons/go'
 import { Avatar } from '@chakra-ui/avatar'
 
+import { logout } from '@src/services/LoginWithGoogle'
+import { useAuthUserAtom } from '@src/atoms/AuthUserAtom'
+
 const Header: React.FC = () => {
+  const history = useHistory()
+
+  const [, setUser] = useAtom(useAuthUserAtom)
+
   return (
-    <HStack
-      pt="4"
-      pb="8"
-      pr="6"
-      justifyContent="space-between"
-      alignItems="center"
-    >
+    <HStack py="4" pr="6" justifyContent="space-between" alignItems="center">
       <Box mx="auto">
         <FormControl width="md">
           <InputGroup>
@@ -40,7 +43,16 @@ const Header: React.FC = () => {
         <MenuList>
           <MenuItem>Edit Profile</MenuItem>
           <MenuDivider />
-          <MenuItem>Logout</MenuItem>
+          <MenuItem
+            onClick={() => {
+              logout().then(() => {
+                setUser(null)
+                history.push('/')
+              })
+            }}
+          >
+            Logout
+          </MenuItem>
         </MenuList>
       </Menu>
     </HStack>
