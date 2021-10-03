@@ -9,16 +9,9 @@ import { CgMail } from 'react-icons/cg'
 
 import { useAuthUserAtom } from '@src/atoms/AuthUserAtom'
 import { LoginWithGoogle } from '@src/services/LoginWithGoogle'
-// import { useHistory } from 'react-router'
 
 const StartUp: React.FC = () => {
   const [user] = useAtom(useAuthUserAtom)
-  // const history = useHistory()
-
-  // const onGoogleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   e.preventDefault()
-  //   LoginWithGoogle()
-  // }
 
   return user ? (
     <Redirect to="/:dn/dashboard" />
